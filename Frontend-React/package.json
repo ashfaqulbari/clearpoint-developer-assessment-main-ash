@@ -1,0 +1,52 @@
+{
+  "name": "todolist.app",
+  "version": "0.1.0",
+  "private": true,
+  "author": "ClearPoint",
+  "dependencies": {
+    "@testing-library/user-event": "^14.4.3",
+    "axios": "^1.2.2",
+    "bootstrap": "^5.2.3",
+    "cross-env": "^7.0.3",
+    "node-sass": "^8.0.0",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.7.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
+    "web-vitals": "^3.1.1"
+  },
+  "scripts": {
+    "start": "cross-env BROWSER=chrome react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "prettier": "^2.8.3"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!@axios)/"
+    ]
+  }
+}
