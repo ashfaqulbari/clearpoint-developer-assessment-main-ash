@@ -283,7 +283,26 @@ describe('Todo List App', () => {
 
     // Assert that "Task A" is no longer present
     expect(screen.queryByText('Task A')).not.toBeInTheDocument();
-});
+  });
+
+  test('should display an alert when description contains invalid characters', () => {
+    render(<App />);
+    
+    // Mock the alert function
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+
+    // Find the description input and add a value with invalid characters
+    fireEvent.change(screen.getByPlaceholderText('Enter description...'), { target: { value: '$$$' } });
+
+      // Find and click the "Add Item" button by its role
+    fireEvent.click(screen.getByRole('button', { name: /Add Item/i }));
+
+    // Assert that the alert was called with the expected message
+    expect(window.alert).toHaveBeenCalledWith('Description can only contain letters and numbers');
+
+    // Cleanup the mock
+    window.alert.mockRestore();
+  });
   
   // Testing the handleError function
   test('should alert with the server error message when error.response exists', () => {
@@ -380,7 +399,9 @@ describe('Todo List App', () => {
 
     // Cleanup the mock
     window.alert.mockRestore();
-});
+  });
+
+
 
   // test('should display an error alert when trying to add a duplicate incomplete item', async () => {
   //   // Arrange: Set up the initial mock data with one incomplete item
