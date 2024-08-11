@@ -115,7 +115,7 @@ namespace TodoList.Api.Controllers
 
             try
             {
-                // Check for duplicate items based on trimmed and case-insensitive description
+                // Check for duplicate items based on trimmed and case-insensitive description (note only for incomplete items)
                 var existingItems = await _todoService.GetIncompleteTodoItems();
                 if (existingItems.Any(item => 
                     item.Description.Trim().Equals(todoItem.Description)))

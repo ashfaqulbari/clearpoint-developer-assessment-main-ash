@@ -43,20 +43,23 @@ export const sortItems = (items, sortOption) => {
     let errorMessage = 'An error occurred';
   
     if (error.response) {
-      // Handle errors returned from the backend
-      const backendMessage = error.response.data?.message || error.response.data || 'An error occurred on the server';
-      errorMessage = `Failed: ${backendMessage}`;
+        // Handle errors returned from the backend
+        const backendMessage = 
+            (typeof error.response.data === 'string' && error.response.data) || 
+            error.response.data?.message || 
+            'An error occurred on the server';
+        errorMessage = `Failed: ${backendMessage}`;
     } else if (error.request) {
-      // Handle errors where the request was made but no response was received
-      errorMessage = 'No response from the server. Please try again later.';
+        // Handle errors where the request was made but no response was received
+        errorMessage = 'No response from the server. Please try again later.';
     } else {
-      // Handle other errors
-      errorMessage = `Error: ${error.message}`;
+        // Handle other errors
+        errorMessage = `Error: ${error.message}`;
     }
   
     alert(errorMessage);
     console.error('Error:', error);
     
     return errorMessage; // Return the error message for further use if needed
-  };
+};
   

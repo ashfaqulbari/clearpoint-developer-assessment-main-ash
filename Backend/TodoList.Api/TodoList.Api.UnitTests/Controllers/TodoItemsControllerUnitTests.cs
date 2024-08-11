@@ -148,8 +148,9 @@ namespace TodoList.Api.UnitTests.Controllers
             // Act: Call the method under test with an invalid GUID
             var result = await _controller.GetTodoItem(invalidGuid);
 
-            // Assert: Verify that the result is a BadRequestResult
-            Assert.IsType<BadRequestResult>(result);
+            // Assert: Verify that the result is also categorized as under 404 not found status code
+            var statusCodeResult = Assert.IsType<NotFoundResult>(result);
+            Assert.Equal(404, statusCodeResult.StatusCode);
         }
 
         // Edge Case: Service Unavailability for GetTodoItems Method:
@@ -167,7 +168,7 @@ namespace TodoList.Api.UnitTests.Controllers
             // Assert: Verify that the result is a StatusCodeResult indicating a service unavailability
             var statusCodeResult = Assert.IsType<ObjectResult>(result);
             Assert.Equal(500, statusCodeResult.StatusCode);
-            Assert.Equal("Internal Server Error", statusCodeResult.Value);
+            Assert.Equal("Internal server error", statusCodeResult.Value);
         }
 
         // Testing the PutTodoItem Method
@@ -286,9 +287,9 @@ namespace TodoList.Api.UnitTests.Controllers
             var result = await _controller.PostTodoItem(mockItem);
 
             // Assert: Verify that the result is an ObjectResult with a 409 status code
-            var conflictResult = Assert.IsType<ObjectResult>(result);
+            var conflictResult = Assert.IsType<ConflictObjectResult>(result);
             Assert.Equal(409, conflictResult.StatusCode);
-            Assert.Equal("An item with the same description already exists.", conflictResult.Value);
+            Assert.Equal("An incomplete item with the same description already exists.", conflictResult.Value);
         }
     }
 }
